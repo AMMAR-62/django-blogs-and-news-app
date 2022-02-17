@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}
+    News
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="row col-md-4 col-sm-5 col-lg-6 m-3">
+            <div class="col-6">
+                <h2>Search Country</h2>
+                <form action="" method="get">
+                    <input type="text" name="country">
+                    <button type="submit" value="Search">Search</button>
+                </form>
+            </div>
+            <div class="col-6">
+                <h2>Search Category</h2>
+                <form action="" method="get">
+                    <input type="text" name="category">
+                    <button type="submit" value="Search">Search</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            <a class=" col-3 btn btn-secondary d-inline" href="{% url 'news' %}?category=technology">Technology</a>
+            <a class=" col-3 btn btn-success d-inline" href="{% url 'news' %}?category=health">Health</a>
+            <a class=" col-3 btn btn-danger d-inline" href="{% url 'news' %}?category=Entertainment">Entertainment</a>
+            <a class=" col-3 btn btn-secondary d-inline" href="{% url 'news' %}?category=Sports">Sports</a>
+            <a class=" col-3 btn btn-primary d-inline" href="{% url 'news' %}?category=Science">Science</a>
+            <a class=" col-3 btn btn-info d-inline" href="{% url 'news' %}?category=Business">Business</a>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            {% for i in articles %}
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card rounded shadow-lg m-2">
+                    <img src="{{ i.urlToImage }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <p class="card-text">{{ i.author }}</p>
+                    <h5 class="card-title">{{ i.title }}</h5>
+                    <p class="card-title">{{ i.source.name }}</p>
+                    <p class="card-text">{{ i.description }}</p>
+                    <hr>
+                    <small>date: {{ i.publishedAt }}</small>
+                    <a href="{{i.url}}" target="_blank" class="btn btn-success m-1">See News</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
